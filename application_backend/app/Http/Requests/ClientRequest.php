@@ -27,7 +27,7 @@ class ClientRequest extends FormRequest
         return [
             'nama_lengkap' => ['required', 'string', 'max:150'],
             'tipe_pengajuan' => ['required', Rule::enum(TipePengajuan::class)],
-            'nominal' => ['required', 'integer', 'max:200000000'],
+            'nominal' => ['required', 'integer', 'min:1'],
             'tenor' => ['required', 'integer', 'min:1', 'max:24'],
             'pendapatan_bulanan' => ['required', 'integer', 'min:1000000'],
             'catatan' => ['nullable', 'string'],
@@ -44,8 +44,8 @@ class ClientRequest extends FormRequest
             'tipe_pengajuan.in' => 'Tipe pengajuan harus berupa Motor, Mobil, atau Multiguna.',
 
             'nominal.required' => 'Nominal pengajuan wajib diisi.',
-            // 'nominal.min' => 'Nominal pengajuan tidak kurang dari 1.000.000.',
-            'nominal.max' => 'Nominal pengajuan maksimal Rp200.000.000.',
+            'nominal.min' => 'Nominal pengajuan tidak kurang dari 1.',
+            // 'nominal.max' => 'Nominal pengajuan maksimal Rp200.000.000.',
 
             'tenor.required' => 'Tenor wajib diisi.',
             'tenor.min' => 'Tenor minimal 1 bulan.',
