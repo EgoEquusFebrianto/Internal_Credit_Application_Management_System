@@ -1,19 +1,128 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Folder `frontend/` berisi antarmuka aplikasi yang dibangun menggunakan React dan JavaScript.
 
-Currently, two official plugins are available:
+Dokumentasi mengenai fitur, business rules, instalasi, API, dan keseluruhan aplikasi tersedia pada [README utama](../README.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Struktur
 
-## React Compiler
+```text
+frontend/
+└── src/
+    ├── components/
+    │   ├── client_detail/
+    │   └── home/
+    ├── features/
+    │   ├── api/
+    │   └── client/
+    ├── pages/
+    ├── test/
+    ├── utils/
+    ├── App.jsx
+    ├── main.jsx
+    └── RootProvider.jsx
+```
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Penjelasan
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+### `src/components/`
 
-## Expanding the ESLint configuration
+Berisi komponen UI yang digunakan oleh halaman aplikasi.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### `components/home/`
+
+Berisi komponen untuk halaman utama.
+
+-`ApplicationForm.jsx` — form untuk membuat pengajuan baru.
+-`ApplicationTable.jsx` — tabel untuk menampilkan daftar pengajuan.
+-`ApplicationActions.jsx` — aksi approve, reject, dan detail pada setiap pengajuan.
+
+#### `components/client_detail/`
+
+Berisi komponen UI yang digunakan untuk menampilkan detail pengajuan nasabah.
+
+---
+
+### `src/features/`
+
+Berisi logic yang dikelompokkan berdasarkan fitur atau tanggung jawab aplikasi.
+
+#### `features/api/`
+
+Berisi konfigurasi komunikasi HTTP dengan backend, termasuk konfigurasi Axios.
+
+#### `features/client/`
+
+Berisi logic yang berkaitan dengan data dan proses pengajuan nasabah.
+
+Bagian ini mencakup service dan hook/context yang digunakan untuk mengambil, membuat, serta memperbarui data pengajuan.
+
+---
+
+### `src/pages/`
+
+Berisi komponen yang merepresentasikan halaman aplikasi.
+
+-`HomePage.jsx` — halaman utama yang berisi form dan daftar pengajuan.
+-`ClientDetailPage.jsx` — halaman untuk melihat detail pengajuan berdasarkan ID.
+
+---
+
+### `src/test/`
+
+Berisi konfigurasi dan automated test untuk frontend.
+
+Test berfokus pada behaviour komponen yang penting, seperti behaviour `ApplicationForm`.
+
+---
+
+### `src/utils/`
+
+Berisi utility function yang digunakan kembali oleh beberapa bagian aplikasi.
+
+Contohnya adalah utility untuk menampilkan:
+
+- Success alert.
+- Error alert.
+- Validation error.
+- Confirmation dialog.
+
+---
+
+### `App.jsx`
+
+Menjadi komponen utama aplikasi dan mendefinisikan routing menggunakan React Router.
+
+---
+
+### `main.jsx`
+
+Menjadi entry point aplikasi React dan melakukan proses mounting aplikasi ke DOM.
+
+---
+
+### `RootProvider.jsx`
+
+Berisi provider utama yang digunakan untuk menyediakan context atau state yang dibutuhkan oleh aplikasi.
+
+---
+
+## Prinsip Pembagian Tanggung Jawab
+
+Secara sederhana, alur frontend adalah:
+
+```text
+Page
+  ↓
+Component
+  ↓
+Hook / Context
+  ↓
+Service
+  ↓
+Axios
+  ↓
+Laravel REST API
+```
+
+Dengan pembagian tersebut, komponen UI tidak perlu menangani detail komunikasi HTTP secara langsung.

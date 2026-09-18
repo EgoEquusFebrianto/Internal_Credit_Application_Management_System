@@ -1,3 +1,5 @@
+# Backend
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -7,53 +9,148 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+Folder `backend/` berisi REST API yang dibangun menggunakan Laravel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Dokumentasi mengenai fitur, business rules, API, instalasi, dan cara menjalankan aplikasi secara keseluruhan tersedia pada [README utama](../README.md).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Struktur
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```text
+backend/
+├── app/
+│   ├── Enums/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Requests/
+│   │   └── Resources/
+│   ├── Models/
+│   ├── Services/
+│   └── Support/
+│
+├── database/
+│   ├── factories/
+│   └── migrations/
+│
+├── routes/
+│   └── api.php
+│
+└── tests/
+    ├── Feature/
+    └── Unit/
+```
 
-## Learning Laravel
+## Penjelasan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### `app/`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Berisi source code utama aplikasi Laravel.
 
-## Laravel Sponsors
+#### `app/Enums/`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Berisi enum yang digunakan untuk nilai yang memiliki pilihan tetap.
 
-### Premium Partners
+- `StatusPengajuan.php` — mendefinisikan status pengajuan (`PENDING`, `DISETUJUI`, `DITOLAK`).
+- `TipePengajuan.php` — mendefinisikan tipe pengajuan (`MOTOR`, `MOBIL`, `MULTIGUNA`).
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+#### `app/Http/Controllers/`
 
-## Contributing
+Berisi controller yang menerima HTTP request dan mengatur proses request sebelum mengembalikan response.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- `ClientController.php` — menangani endpoint terkait pengajuan nasabah.
 
-## Code of Conduct
+#### `app/Http/Requests/`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Berisi Form Request untuk validasi data yang diterima dari API.
 
-## Security Vulnerabilities
+- `ClientRequest.php` — validasi ketika membuat pengajuan.
+- `UpdateStatusClientRequest.php` — validasi ketika mengubah status pengajuan.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### `app/Http/Resources/`
 
-## License
+Berisi API Resource untuk menentukan struktur data yang dikembalikan melalui API.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- `ClientResource.php` — mengubah data `Client` menjadi response JSON yang digunakan frontend.
+
+#### `app/Models/`
+
+Berisi model Eloquent yang merepresentasikan data pada database.
+
+- `Client.php` — model untuk data pengajuan pada tabel `clients`.
+
+#### `app/Services/`
+
+Berisi business logic utama aplikasi sehingga tidak ditempatkan langsung pada controller.
+
+- `ClientService.php` — menangani proses pembuatan pengajuan dan perubahan status serta pemeriksaan aturan bisnis terkait.
+
+#### `app/Support/`
+
+Berisi class pendukung dengan tanggung jawab khusus.
+
+- `InstallmentCalculator.php` — menghitung estimasi cicilan per bulan berdasarkan nominal dan tenor.
+
+---
+
+### `database/`
+
+Berisi komponen yang berkaitan dengan database.
+
+#### `database/factories/`
+
+Berisi factory untuk membuat data dummy atau data pengujian.
+
+- `ClientFactory.php` — membuat data pengajuan untuk kebutuhan development dan testing.
+
+#### `database/migrations/`
+
+Berisi migration untuk mendefinisikan struktur tabel database.
+
+---
+
+### `routes/`
+
+Berisi definisi route aplikasi.
+
+#### `routes/api.php`
+
+Mendefinisikan endpoint REST API yang digunakan frontend.
+
+---
+
+### `tests/`
+
+Berisi automated test untuk backend.
+
+#### `tests/Feature/`
+
+Berisi pengujian terhadap behaviour aplikasi melalui HTTP/API dan business flow.
+
+#### `tests/Unit/`
+
+Berisi pengujian terhadap komponen secara terisolasi, seperti perhitungan cicilan.
+
+---
+
+## Prinsip Pembagian Tanggung Jawab
+
+Secara sederhana, alur backend adalah:
+
+```text
+Route
+  ↓
+Controller
+  ↓
+Request Validation
+  ↓
+Service
+  ↓
+Model / Eloquent
+  ↓
+Database
+  ↓
+Resource
+  ↓
+JSON Response
+```
+
+Pembagian tersebut digunakan agar setiap bagian memiliki tanggung jawab yang jelas dan kode lebih mudah dipelihara.

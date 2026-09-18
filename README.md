@@ -460,12 +460,12 @@ Content-Type: application/json
 
 ```json
 {
-    "nama_lengkap": "Febrianto Kudadiri",
+    "nama_lengkap": "Test User",
     "tipe_pengajuan": "MOTOR",
-    "nominal": 12000000,
-    "tenor": 12,
-    "pendapatan_bulanan": 5000000,
-    "catatan": "Pengajuan kendaraan"
+    "nominal": 10000000,
+    "tenor": 15,
+    "pendapatan_bulanan": 1000000,
+    "catatan": "Init Catatan Testing"
 }
 ```
 
@@ -508,7 +508,7 @@ Content-Type: application/json
 
 ```json
 {
-    "status": "APPROVED"
+    "status": "DISETUJUI"
 }
 ```
 
@@ -516,7 +516,7 @@ Content-Type: application/json
 
 ```json
 {
-    "status": "REJECTED"
+    "status": "DITOLAK"
 }
 ```
 
@@ -524,8 +524,8 @@ Content-Type: application/json
 
 ```text
 PENDING
-APPROVED
-REJECTED
+DISETUJUI
+DITOLAK
 ```
 
 Backend akan melakukan pemeriksaan terhadap aturan bisnis sebelum status diubah.
@@ -662,14 +662,14 @@ Status pengajuan menggunakan alur:
 ```text
 PENDING
    │
-   ├──────────────► APPROVED
+   ├──────────────► DISETUJUI
    │
-   └──────────────► REJECTED
+   └──────────────► DITOLAK
 ```
 
 `PENDING` merupakan status awal ketika pengajuan dibuat.
 
-`APPROVED` dan `REJECTED` merupakan hasil dari proses review pengajuan.
+`DISETUJUI` dan `DITOLAK` merupakan hasil dari proses review pengajuan.
 
 ---
 
