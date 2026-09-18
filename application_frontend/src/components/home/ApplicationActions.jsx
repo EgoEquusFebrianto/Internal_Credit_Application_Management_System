@@ -23,7 +23,7 @@ export const ApplicationActions = ({ clientID, updateClient, status }) => {
                     : "Pengajuan nasabah berhasil ditolak."
             );
         } catch (error) {
-            showErrorAlert("Gagal memperbaharui status pengajuan. Harap Hubungi tim IT bila masalah berulang.");
+            showErrorAlert(error?.response?.data?.message ?? "Gagal memperbaharui status pengajuan. Harap Hubungi tim IT bila masalah berulang.");
         }
     };
 

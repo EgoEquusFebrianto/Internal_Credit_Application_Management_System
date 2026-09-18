@@ -33,9 +33,9 @@ Berisi komponen UI yang digunakan oleh halaman aplikasi.
 
 Berisi komponen untuk halaman utama.
 
--`ApplicationForm.jsx` — form untuk membuat pengajuan baru.
--`ApplicationTable.jsx` — tabel untuk menampilkan daftar pengajuan.
--`ApplicationActions.jsx` — aksi approve, reject, dan detail pada setiap pengajuan.
+- `ApplicationForm.jsx` — form untuk membuat pengajuan baru.
+- `ApplicationTable.jsx` — tabel untuk menampilkan daftar pengajuan.
+- `ApplicationActions.jsx` — aksi approve, reject, dan detail pada setiap pengajuan.
 
 #### `components/client_detail/`
 
@@ -63,8 +63,8 @@ Bagian ini mencakup service dan hook/context yang digunakan untuk mengambil, mem
 
 Berisi komponen yang merepresentasikan halaman aplikasi.
 
--`HomePage.jsx` — halaman utama yang berisi form dan daftar pengajuan.
--`ClientDetailPage.jsx` — halaman untuk melihat detail pengajuan berdasarkan ID.
+- `HomePage.jsx` — halaman utama yang berisi form dan daftar pengajuan.
+- `ClientDetailPage.jsx` — halaman untuk melihat detail pengajuan berdasarkan ID.
 
 ---
 

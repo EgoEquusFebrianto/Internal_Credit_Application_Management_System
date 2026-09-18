@@ -534,6 +534,10 @@ Backend akan melakukan pemeriksaan terhadap aturan bisnis sebelum status diubah.
 
 ![Get API](./asserts/patch_success.png)
 
+> Untuk contoh hasil **Frontend** dapat dilihat pada demo video di folder assets:
+
+<video src="./assets/video_demo_raw.mp4" controls width="100%"></video>
+
 ---
 
 # Testing
