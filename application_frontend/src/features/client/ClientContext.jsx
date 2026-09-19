@@ -94,17 +94,17 @@ export const ClientContextProvider = ({children}) => {
     }, [getClients]);
 
     const contextValue = useMemo(
-    () => ({
-      clients,
-      loading,
-      error,
-      getClients,
-      getClientDetail,
-      createClient,
-      updateClientStatus,
-    }),
-    [clients, loading, error, getClients, getClientDetail, createClient, updateClientStatus]
-  );
+        () => ({
+            clients,
+            loading,
+            error,
+            getClients,
+            getClientDetail,
+            createClient,
+            updateClientStatus,
+        }),
+        [clients, loading, error, getClients, getClientDetail, createClient, updateClientStatus]
+    );
 
     return (
         <ClientContext.Provider value={contextValue}>

@@ -29,6 +29,6 @@ class InstallmentCalculatorTest extends TestCase
     {
         $hasil = $this->calculator->tagihanBulanan(12_000_000, 12);
 
-        $this->assertSame(1_060_000.0, $hasil);
+        $this->assertSame(1_060_000, $hasil);
     }
 }
